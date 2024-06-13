@@ -1,4 +1,4 @@
-public class Vehicle {
+public abstract class Vehicle {
     private String brand;
     private String model;
     private double value;
@@ -21,11 +21,9 @@ public class Vehicle {
         return value;
     }
 
-    public double getInsuranceRate() {
-        return 0;
-    }
+    public abstract double getInsuranceRatePerDay();
 
-    public double getRentalCost(int days) {
-        return 0;
-    }
+    public abstract double getRentalCost(int days);
+
+    public abstract double getInsuranceAddition();
 }
