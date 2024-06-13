@@ -76,7 +76,7 @@ class Invoice {
             System.out.println("Insurance addition per day: $" + df.format(insuranceAdditionPerDay));
         }
 
-        if (insuranceDiscountPerDay != 0) {
+        if (insuranceDiscountPerDay > 0) {
             System.out.println("Initial insurance per day: $" + df.format(initialInsurancePerDay));
             System.out.println("Insurance discount per day: $" + df.format(insuranceDiscountPerDay));
         }
@@ -87,6 +87,7 @@ class Invoice {
             System.out.println();
             System.out.println("Early return discount for rent: $" + df.format(earlyReturnRentDiscount));
         }
+
         if (earlyReturnInsuranceDiscount > 0) {
             System.out.println("Early return discount for insurance: $" + df.format(earlyReturnInsuranceDiscount));
         }
