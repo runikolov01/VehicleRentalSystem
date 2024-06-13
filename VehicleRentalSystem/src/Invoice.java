@@ -46,15 +46,14 @@ class Invoice {
             }
         }
 
-        // Calculate early return discounts
         double earlyReturnRentDiscount = 0;
         double earlyReturnInsuranceDiscount = 0;
-        long daysDifference = actualEndDate.getTime() - endDate.getTime();
-        int daysOverdue = (int) Math.max(TimeUnit.DAYS.convert(daysDifference, TimeUnit.MILLISECONDS), 0);
 
-        if (daysOverdue > 0) {
-            earlyReturnRentDiscount = rentalCostPerDay * daysOverdue / 2;
-            earlyReturnInsuranceDiscount = initialInsurancePerDay * daysOverdue;
+        long daysDifference = TimeUnit.DAYS.convert(endDate.getTime() - actualEndDate.getTime(), TimeUnit.MILLISECONDS);
+
+        if (daysDifference > 0) {
+            earlyReturnRentDiscount = (daysDifference * rentalCostPerDay) / 2;
+            earlyReturnInsuranceDiscount = (totalInsurance / actualDays) * daysDifference;
         }
 
         System.out.println();
@@ -67,27 +66,30 @@ class Invoice {
         System.out.println("Reservation end date: " + sdf.format(endDate));
         System.out.println("Reserved rental days: " + reservedDays + " days");
         System.out.println();
-        System.out.println("Actual return date: " + sdf.format(actualEndDate));
+        System.out.println("Actual Return date: " + sdf.format(actualEndDate));
         System.out.println("Actual rental days: " + actualDays + " days");
         System.out.println();
         System.out.println("Rental cost per day: $" + df.format(rentalCostPerDay));
-        System.out.println("Initial insurance per day: $" + df.format(initialInsurancePerDay));
 
         if (insuranceAdditionPerDay > 0) {
+            System.out.println("Initial insurance per day: $" + df.format(initialInsurancePerDay));
             System.out.println("Insurance addition per day: $" + df.format(insuranceAdditionPerDay));
         }
 
         if (insuranceDiscountPerDay != 0) {
+            System.out.println("Initial insurance per day: $" + df.format(initialInsurancePerDay));
             System.out.println("Insurance discount per day: $" + df.format(insuranceDiscountPerDay));
         }
 
+        System.out.println("Insurance per day: $" + df.format(insurancePerDay));
+
         if (earlyReturnRentDiscount > 0) {
+            System.out.println();
             System.out.println("Early return discount for rent: $" + df.format(earlyReturnRentDiscount));
         }
         if (earlyReturnInsuranceDiscount > 0) {
             System.out.println("Early return discount for insurance: $" + df.format(earlyReturnInsuranceDiscount));
         }
-        System.out.println("Insurance per day: " + df.format(insurancePerDay));
 
         System.out.println();
         System.out.println("Total rent: $" + df.format(totalRent));
