@@ -1,7 +1,7 @@
 public abstract class Vehicle {
-    private String brand;
-    private String model;
-    private double value;
+    private final String brand;
+    private final String model;
+    private final double value;
 
     public Vehicle(String brand, String model, double value) {
         this.brand = brand;
